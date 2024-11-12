@@ -5,28 +5,28 @@ import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites';
 
-const getTrendingMoviesPage = () => {
-    const { data, error, isLoding, isError } = useQuery('trending', getTrendingMovies);
+const TrendingMoviesPage = () => {
+  const { data, error, isLoading, isError } = useQuery('trending', getTrendingMovies);
 
-    if(isLoding) {
-        return <Spinner />;
-    }
+  if (isLoading) {
+    return <Spinner />;
+  }
 
-    if (isError) {
-        return<h1>{error.message}</h1>;
-    }
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
 
-    const movies =data.results;
+  const movies = data.results;
 
-    return(
-        <PageTemplate
-        title="Trending Movies"
-        movies={movies}
-        action={(movie)=>{
-            return <AddToFavoritesIcon movie={movie} />;
-        }}
-        />
-    );
+  return (
+    <PageTemplate
+      title="Trending Movies"
+      movies={movies}
+      action={(movie) => {
+        return <AddToFavoritesIcon movie={movie} />;
+      }}
+    />
+  );
 };
 
 export default TrendingMoviesPage;
