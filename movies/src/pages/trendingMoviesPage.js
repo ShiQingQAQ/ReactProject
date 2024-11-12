@@ -30,3 +30,4 @@ const TrendingMoviesPage = () => {
 };
 
 export default TrendingMoviesPage;
+
