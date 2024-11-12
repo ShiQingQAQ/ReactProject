@@ -110,5 +110,19 @@ export const getMovie = (args) => {
       throw error;
     });
   };
-  
+  export const getTopratedMovies = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    ).then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.status_message || "Something went wrong");
+        });
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+  };
   
