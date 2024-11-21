@@ -50,6 +50,10 @@ export default function FilterMoviesCard(props) {
     handleChange(e, "genre", e.target.value);
   };
 
+  const handleRatingChange = (e) => {
+    handleChange(e, "rating", e.target.value);// 新增处理评分变化的方法
+  };
+
   return (
     <Card 
       sx={{
@@ -88,6 +92,22 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+
+        {/* 最低评分过滤 */}
+        <TextField
+         sx={{...formControl }}
+         id="rating-input"
+         lable="Minimum Rating"
+         type="number"
+         variant="filled"
+         value={props.ratingFilter}
+         onChange={handleRatingChange}
+         inputProps={{
+          min:0,
+          max:10,
+          step:0.1,
+         }}
+      />
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}

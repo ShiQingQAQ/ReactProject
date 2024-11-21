@@ -8,18 +8,17 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
+  const [ratingFilter, setRatingFilter] = useState(0);// 新增最低评分过滤状态
 
   let displayedMovies = movies
-    .filter((m) => {
-      return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
-    })
-    .filter((m) => {
-      return genreId > 0 ? m.genre_ids.includes(genreId) : true;
-    });
+  .filter((m) => m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1)
+  .filter((m) => (genreId > 0 ? m.genre_ids.includes(genreId) : true))
+  .filter((m) => m.vote_average >= ratingFilter); // 添加评分过滤
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
-    else setGenreFilter(value);
+    else if (type === "genre") setGenreFilter(value);
+    else if (type === "rating") setRatingFilter(value);
   };
 
   return (
@@ -37,6 +36,7 @@ function MovieListPageTemplate({ movies, title, action }) {
             onUserInput={handleChange}
             titleFilter={nameFilter}
             genreFilter={genreFilter}
+            ratingFilter={ratingFilter}// 传递评分过滤
           />
         </Grid>
         <MovieList action={action} movies={displayedMovies}></MovieList>
