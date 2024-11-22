@@ -47,14 +47,14 @@ const TrendingMoviesPage = () => {
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
         >
-          上一页
+          Previous
         </button>
-        <span style={{ margin: "0 10px" }}>第 {page} 页</span>
+        <span style={{ margin: "0 10px" }}> {page} </span>
         <button
           onClick={() => setPage((prev) => prev + 1)}
           disabled={page === data.total_pages}
         >
-          下一页
+          Next
         </button>
       </div>
     </>
